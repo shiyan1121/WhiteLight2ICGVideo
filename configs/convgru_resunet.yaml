@@ -1,0 +1,147 @@
+experiment_name: convgru_resunet_no_time
+seed: 2026
+data:
+  root: E:/ClinicalICG/WhiteLight2ICGVideo/data/3-KeyFramesVideo
+  sample_mode: Intensity_step_sample
+  image_size: 256
+  max_frames_per_patch: 32
+  frame_step: 1
+  frame_step_offsets: all
+  inference_max_frames_per_patch: 32
+  time_reference: normalized
+  include_vessel_mask: true
+  input_vessel_mask_source: global
+  rgb2vessel_root: E:/ClinicalICG/WhiteLight2ICGVideo/data/RGB2Vessel
+  guidance_vessel_mask_source: global
+  include_mtt: false
+  mask_mtt_with_vessel: false
+  include_lsci: false
+  input_rgb: baseline
+  require_complete_patch: true
+split:
+  name: three_val_three_test
+  description: S10/S26/S27 validation; S15/S23/S25 test; all other subjects training.
+  train_subjects:
+  - S1-251118
+  - S2-251119
+  - S3-251126
+  - S4-251203
+  - S5-251210
+  - S7-251217
+  - S8-251223
+  - S11-260114
+  - S12-260127
+  - S13-260127
+  - S16-260317
+  - S17-260324
+  - S18-260410
+  - S20-260422
+  - S24-260526
+  - S29-260718
+  - S30-260804
+  - S31-260807
+  - S32-260819
+  - S33-260821
+  - S34-260901
+  - S35-260929
+  val_subjects:
+  - S10-251230
+  - S26-260605
+  - S27-260623
+  test_subjects:
+  - S15-260304
+  - S23-260519
+  - S25-260602
+model:
+  name: convgru_resunet
+  backbone: resunet
+  base_channels: 32
+  previous_frames: 0
+  include_rgb: true
+  include_time: false
+  include_vessel_mask: true
+  include_mtt: false
+  include_lsci: false
+  include_prev_time_delta: false
+  output_mode: frame_keyframe_mask
+  output_channels: 2
+  convgru:
+    enabled: true
+    detach_interval: 0
+train:
+  epochs: 60
+  best_start_epoch: 1
+  best_metric: ssim
+  best_metric_mode: max
+  batch_size: 1
+  val_batch_size: 1
+  gradient_accumulation_steps: 1
+  teacher_forcing: always
+  teacher_forcing_schedule:
+    warmup_epochs: 5
+    decay_end_epoch: 20
+    start_ratio: 1.0
+    end_ratio: 0.1
+  num_workers: 2
+  lr: 0.0002
+  weight_decay: 0.0
+  amp: true
+  log_every: 500
+  sequence_training:
+    enabled: true
+    batch_size: 1
+    val_batch_size: 1
+    detach_interval: 0
+  early_frame_sampling:
+    enabled: false
+    num_frames: 3
+    multiplier: 3.0
+    replacement: true
+    num_samples: null
+  preview_every: 1
+  preview_font_size: 24
+  preview_val_subject_index: 2
+  preview_case_index: 1
+  preview_patch_id: null
+loss:
+  l1_weight: 1.0
+  ssim_weight: 0.0
+  vessel_weight: 2.0
+  ms_ssim_weight: 0.5
+  vessel_ssim_weight: 0.0
+  gradient_weight: 0.0
+  vessel_gradient_weight: 0.0
+  early_frame_weight:
+    enabled: false
+    num_frames: 3
+    weight: 3.0
+  temporal_change_weight: 0.0
+  temporal_change_vessel_weight: 1.0
+  temporal_change_curve_weight: 0.0
+  sequence_vessel_curve:
+    enabled: false
+    weight: 1.0
+    value_weight: 1.0
+    delta_weight: 1.0
+    corr_weight: 0.2
+    every_n_steps: 1
+    chunk_size: 4
+  aux_keyframe_vessel:
+    enabled: true
+    weight: 0.5
+    frame_weight: 1.0
+    frame_time_weighting:
+      enabled: true
+      early_threshold: 0.5
+      early_weight: 2.0
+      late_weight: 1.0
+    mask_weight: 0.25
+    bce_weight: 1.0
+    dice_weight: 1.0
+    focal_gamma: 2.0
+    focal_alpha: 0.75
+    pred_mask_frame_weight: 0.0
+    target_threshold: 0.5
+    smooth: 1.0
+output:
+  root: .

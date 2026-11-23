@@ -1,0 +1,48 @@
+{
+  "source": "C:\\Users\\14579\\Desktop\\RGB2ICGVideo结果整理\\2-实验代码及结果\\Code",
+  "main_experiment": "E:\\ClinicalICG\\WhiteLight2ICGVideo\\code\\4-WhiteLight2ICGVideo-ConvGRU\\experiments\\261011-ablation_261009_no_time",
+  "checks": [
+    {
+      "test": "original_checkpoint_and_prediction_parity",
+      "checkpoint": "E:\\ClinicalICG\\WhiteLight2ICGVideo\\code\\4-WhiteLight2ICGVideo-ConvGRU\\experiments\\261011-ablation_261009_no_time\\checkpoints\\best.pt",
+      "strict_load": true,
+      "parameters": 25248962,
+      "steps": 4,
+      "max_absolute_difference": 0.0,
+      "reconstruction_loss_equal": true
+    },
+    {
+      "test": "rgb_vm_input_ablation_construction",
+      "passed": true
+    },
+    {
+      "test": "entrypoint_help_imports",
+      "passed": true
+    },
+    {
+      "test": "synthetic_loss_backward_optimizer_checkpoint_and_32_frame_rollout",
+      "passed": true
+    },
+    {
+      "test": "real_rgb_vm_standalone_inference",
+      "subject_patch": "S23-260519_09",
+      "frames": 32,
+      "resolution": [
+        256,
+        256
+      ],
+      "device": "cpu",
+      "target_icg_used": false,
+      "passed": true
+    },
+    {
+      "test": "git_bash_launchers_syntax",
+      "passed": true
+    }
+  ],
+  "not_performed": [
+    "60-epoch full retraining",
+    "full test-set evaluation",
+    "cohort-level FVD"
+  ]
+}

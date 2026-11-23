@@ -1,0 +1,3 @@
+-r requirements.txt
+lpips
+cd-fvd
