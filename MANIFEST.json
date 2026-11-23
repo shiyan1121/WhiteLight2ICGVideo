@@ -1,5 +1,5 @@
 {
-  "README.md": "3940cc6865338692e9b9ff2dd29aaae7a2837d6666725e1eb1f4a207917a6670",
+  "README.md": "00d9f5b404a0236694f3c4f25c2e48fde70f010933fd8e08a3f1c5d6a0a37abb",
   "VERIFICATION.json": "6f15adffdace44de126a7f72e1b35c61a9867572f29e3288e3533c87bb08267e",
   "configs/convgru_resunet.yaml": "e87fcade354713b3b6f244c538ec3cfcbb56ca8515a9d267d887d110fb417dca",
   "eval/__init__.py": "1dde03b50a738fc75c33694cec2fee526aa5d6c95cd000897d17aff884252f2d",
@@ -21,5 +21,7 @@
   "wlicgv/losses.py": "c103fe567e11f32c37ce90ea3df5b9379b5d729abb5e852acb36cb0668d9ed82",
   "wlicgv/models.py": "aa460a8a9ad119b7b16bc4ee5fd094d41b5303dfaf5af4061e2ebc13227144a2",
   "wlicgv/time_templates.py": "fc1edac6c7e28a3a377932a1da24802626e3485a42574948395a181dca1622e2",
-  "wlicgv/utils.py": "f4ff75e04fe29e19907075945a8be67389781e9063218143d360809d8156c93d"
+  "wlicgv/utils.py": "f4ff75e04fe29e19907075945a8be67389781e9063218143d360809d8156c93d",
+  "assets/framework.png": "d299dc342cb0b4864a62ae4e86815aeb33653fd04cfc9e8c84c179b055f73817",
+  "assets/paper_overview.jpg": "47ae0f1c80e24c601681d80c1d6c22fd318a8d5c1535211306745b27f9714835"
 }
